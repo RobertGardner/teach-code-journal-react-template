@@ -5,8 +5,7 @@
   "description": "Convert code-journal frontend to React.",
   "scripts": {
     "dev": "npm run dev --prefix client",
-    "lint": "npm run lint --prefix client",
-    "prepare": "husky install"
+    "lint": "npm run lint --prefix client"
   },
   "devDependencies": {
     "@learningfuze/lfz-config": "^1.0.0",
