@@ -33,11 +33,15 @@ function writeData(data: Data): void {
   localStorage.setItem(dataKey, dataJSON);
 }
 
-export function readEntries(): Entry[] {
+export async function readEntries(): Promise<Entry[]> {
   return readData().entries;
 }
 
-export function addEntry(entry: UnsavedEntry): Entry {
+export async function readEntry(entryId: number): Promise<Entry | undefined> {
+  return readData().entries.find((e) => e.entryId === entryId);
+}
+
+export async function addEntry(entry: UnsavedEntry): Promise<Entry> {
   const data = readData();
   const newEntry = {
     ...entry,
@@ -48,7 +52,7 @@ export function addEntry(entry: UnsavedEntry): Entry {
   return newEntry;
 }
 
-export function updateEntry(entry: Entry): Entry {
+export async function updateEntry(entry: Entry): Promise<Entry> {
   const data = readData();
   const newEntries = data.entries.map((e) =>
     e.entryId === entry.entryId ? entry : e
@@ -58,7 +62,7 @@ export function updateEntry(entry: Entry): Entry {
   return entry;
 }
 
-export function removeEntry(entryId: number): void {
+export async function removeEntry(entryId: number): Promise<void> {
   const data = readData();
   const updatedArray = data.entries.filter(
     (entry) => entry.entryId !== entryId
