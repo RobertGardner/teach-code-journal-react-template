@@ -297,5 +297,8 @@ function viewSwap(viewName: 'entries' | 'entry-form'): void {
     $entryFormView.classList.remove('hidden');
     $entriesView.classList.add('hidden');
   }
-  data.view = viewName;
+  if (data.view !== viewName) {
+    data.view = viewName;
+    writeData();
+  }
 }
